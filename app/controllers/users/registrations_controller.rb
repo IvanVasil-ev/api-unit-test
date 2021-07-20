@@ -1,4 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :configure_permitted_parameters, :only => [:create]
   respond_to :json
 
   private
@@ -16,4 +17,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def register_failed
     render json: { message: "Something went wrong." }
   end
+
+  protected
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password])
+    end
 end
