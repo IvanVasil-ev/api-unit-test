@@ -4,7 +4,7 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(resource, _opts = {})  
-    render json: { message: 'You are logged in.' }, status: :ok
+    render json: { user: current_user, access_key: Rails.application.credentials.devise[:jwt_secret_key] }, status: :ok
   end
 
   def respond_to_on_destroy
