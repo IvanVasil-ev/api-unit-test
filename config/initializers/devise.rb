@@ -17,7 +17,10 @@ Devise.setup do |config|
   # config.secret_key = 'ddce8c6abd08f390b896141bf556d0f7683ff6eba9de9bd041c21c43f07d7b41a026c598f47fccfbc58bb49444401def1ec4b53d57d584ebc9ba12c006ec5d4c'
   config.jwt do |jwt|
     jwt.secret = Rails.application.credentials.devise[:jwt_secret_key]
-    jwt.dispatch_requests = [ ['POST', %r{^http://localhost:3000/users/sign_in$}] ]
+    jwt.dispatch_requests = [
+      ['POST', %r{^\/sign_in}]
+    ]
+    jwt.aud_header = 'JWT_AUD'
   end
 
   # ==> Controller configuration
