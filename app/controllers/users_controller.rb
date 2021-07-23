@@ -11,6 +11,14 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  def update
+    if @user.update(todo_params)
+      render json: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
   private
     def set_user
       @user = User.find(params[:id])
