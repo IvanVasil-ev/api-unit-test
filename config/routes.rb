@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :news
-  resources :users
+  resources :users, :except => [:create, :destroy]
 
   devise_for :users,
              controllers: {
