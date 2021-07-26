@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   get '/member-data', to: 'members#show'
 
   get '/users', to: 'users/sessions#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'users/:id/news' => 'news#show_user_news', :as => :user_posts
 end

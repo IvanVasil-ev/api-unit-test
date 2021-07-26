@@ -6,6 +6,13 @@ class NewsController < ApplicationController
     render json: @news
   end
 
+  def show_user_news
+    @user = User.find(params[:id])
+    @news = @user.news
+
+    render json: @news
+  end
+
   def show
     render json: @post
   end
