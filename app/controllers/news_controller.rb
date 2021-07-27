@@ -6,6 +6,14 @@ class NewsController < ApplicationController
     render json: @news
   end
 
+  def show_user_news
+    @news = User.find(params[:user_id]).news
+
+    if @news.present?
+      render json: @news
+    end
+  end
+
   def show
     render json: @post
   end
@@ -26,6 +34,6 @@ class NewsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :description)
+      params.require(:post).permit(:title, :description, :tags, :user_id)
     end
 end
