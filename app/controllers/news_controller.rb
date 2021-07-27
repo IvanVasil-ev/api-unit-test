@@ -7,10 +7,11 @@ class NewsController < ApplicationController
   end
 
   def show_user_news
-    @user = User.find(params[:id])
-    @news = @user.news
+    @news = User.find(params[:user_id]).news
 
-    render json: @news
+    if @news.present?
+      render json: @news
+    end
   end
 
   def show
