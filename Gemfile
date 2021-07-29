@@ -32,3 +32,8 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'devise'
 gem 'devise-jwt'
+
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'google-api-client'
+# gem 'httparty', '~> 0.13.7'
