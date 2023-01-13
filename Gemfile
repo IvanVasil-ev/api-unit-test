@@ -1,38 +1,41 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
-gem 'rails', '~> 6.1.4'
-
-gem 'pg', '~> 1.1'
-
-gem 'puma', '~> 5.0'
-
 gem 'bootsnap', '>= 1.4.4', require: false
-
+gem 'carrierwave', '~> 2.0'
+gem 'devise'
+gem 'devise-jwt'
+gem 'factory_bot_rails'
+gem 'faker'
+gem 'google-api-client'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'pg', '~> 1.1'
+gem 'puma', '~> 5.0'
 gem 'rack-cors'
-
+gem 'rails', '~> 6.1.4'
 gem 'rmagick'
 
-gem 'carrierwave', '~> 2.0'
-
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv-rails'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails'
 end
 
 group :development do
   gem 'listen', '~> 3.3'
+  gem 'rubocop'
+  gem 'rubocop-rails'
   gem 'spring'
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+group :test do
+  gem 'database_cleaner'
+end
 
-gem 'dotenv-rails', groups: [:development, :test]
-
-gem 'devise'
-gem 'devise-jwt'
-
-gem 'omniauth'
-gem 'omniauth-google-oauth2'
-gem 'google-api-client'
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

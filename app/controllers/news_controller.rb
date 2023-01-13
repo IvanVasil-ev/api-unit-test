@@ -1,5 +1,6 @@
-class NewsController < ApplicationController
+# frozen_string_literal: true
 
+class NewsController < ApplicationController
   def index
     @news = News.all
 
@@ -9,9 +10,9 @@ class NewsController < ApplicationController
   def show_user_news
     @news = User.find(params[:user_id]).news
 
-    if @news.present?
-      render json: @news
-    end
+    return unless @news.present?
+
+    render json: @news
   end
 
   def show
@@ -29,11 +30,12 @@ class NewsController < ApplicationController
   end
 
   private
-    def set_post
-      @post = News.find(params[:id])
-    end
 
-    def post_params
-      params.permit(:title, :picture, :description, :tags, :user_id)
-    end
+  def set_post
+    @post = News.find(params[:id])
+  end
+
+  def post_params
+    params.permit(:title, :picture, :description, :tags, :user_id)
+  end
 end
