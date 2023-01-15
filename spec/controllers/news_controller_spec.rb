@@ -18,7 +18,7 @@ RSpec.describe NewsController, type: :controller do
   end
 
   describe 'GET show_user_news' do
-    it 'Returns number of user news (5)' do
+    it 'Returns number of author news (5)' do
       get(:show_user_news, format: :json, params: { user_id: User.first.id })
 
       expect(JSON.parse(response.body).count).to eq(5)
