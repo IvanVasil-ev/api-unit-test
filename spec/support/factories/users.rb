@@ -9,7 +9,9 @@ FactoryBot.define do
 
   trait :with_5_news do
     after(:create) do |user|
+      # rubocop:disable Style/HashSyntax
       create_list(:news, 5, user: user)
+      # rubocop:enable Style/HashSyntax
     end
   end
 end
