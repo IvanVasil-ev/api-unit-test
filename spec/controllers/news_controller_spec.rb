@@ -3,37 +3,40 @@
 require 'rails_helper'
 
 RSpec.describe NewsController, type: :controller do
-  before { create(:user, :with_5_news) }
+  let(:parsed_json) { JSON.parse(response.body) }
 
-  subject(:parsed_json) { JSON.parse(response.body) }
+  before do
+    create(:user, :with_5_news)
+    create(:user, :with_5_news)
+  end
 
-  describe 'GET index' do
-    it 'Returns a 200' do
+  context 'GET#index' do
+    it 'Request is successful' do
       get(:index)
 
-      expect(response).to have_http_status(200)
+      expect(response).to be_successful
     end
 
-    it 'Returns number of news (5)' do
+    it 'Returns count of news (10)' do
       get(:index)
 
-      expect(JSON.parse(response.body).count).to eq(5)
+      expect(parsed_json.count).to eq(10)
     end
   end
 
-  describe 'GET show_user_news' do
+  context 'GET#show_user_news' do
     it 'Returns number of author news (5)' do
-      get(:show_user_news, format: :json, params: { user_id: User.first.id })
+      get(:show_user_news, params: { user_id: User.first.id })
 
       expect(parsed_json.count).to eq(5)
     end
   end
 
-  describe 'GET show' do
+  context 'GET#show' do
     it 'Return specific news' do
-      get(:show, format: :json, params: { id: News.first[:id] })
+      get(:show, params: { id: News.first[:id] })
 
-      is_expected.to include(News.first.attributes.except('picture', 'created_at', 'updated_at'))
+      expect(response.body).to eq(News.first.to_json)
     end
   end
 end
