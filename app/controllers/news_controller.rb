@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class NewsController < ApplicationController
+  before_action :set_post, only: %i[show]
+
   def index
     @news = News.all
 

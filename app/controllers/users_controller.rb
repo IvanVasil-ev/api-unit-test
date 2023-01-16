@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:update]
+  before_action :authenticate_user!, only: %i[update]
   before_action :set_user, only: %i[show update]
 
   def index
